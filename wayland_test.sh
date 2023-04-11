@@ -1,9 +1,9 @@
-# Copy the framebuffer of xvfb.
-podman cp $(podman ps -q -n 1):/opt/Xvfb_screen0 .
+# 
+#podman run --rm --cap-add=SYS_NICE --cap-add=IPC_LOCK -ti ghcr.io/schneegans/gnome-shell-pod-33
+podman run --rm --cap-add=SYS_NICE --cap-add=IPC_LOCK -ti ghcr.io/schneegans/gnome-shell-pod-38
 
-# Convert it to jpeg.
-convert xwd:Xvfb_screen0 capture.jpg
+# Start GNOME Shell.
+systemctl --user start "gnome-xsession@:99"
 
-# And finally display the image.
-# This way we can see that GNOME Shell is actually up and running!
-eog capture.jpg
+# For example, you can run this command inside the container:
+DISPLAY=:99 gnome-control-center
