@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
 # Copy the framebuffer of xvfb.
 podman cp $(podman ps -q -n 1):/opt/Xvfb_screen0 .
 
