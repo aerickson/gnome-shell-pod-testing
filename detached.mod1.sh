@@ -10,12 +10,12 @@ do_in_pod() {
 }
 
 # Install the gnome-backgrounds package.
-do_in_pod sudo dnf -y install gnome-backgrounds
+#do_in_pod sudo dnf -y install gnome-backgrounds
 
 # Set GNOME Shell's background image. This requires a D-Bus connection,
 # so we wrap the command in the set-env.sh script.
-do_in_pod gsettings set org.gnome.desktop.background picture-uri \
-          "file:///usr/share/backgrounds/gnome/adwaita-day.jpg"
+#do_in_pod gsettings set org.gnome.desktop.background picture-uri \
+#          "file:///usr/share/backgrounds/gnome/adwaita-day.jpg"
 
 # Wait until the user bus is available.
 do_in_pod wait-user-bus.sh 
@@ -25,6 +25,10 @@ do_in_pod systemctl --user start "gnome-xsession@:99"
 
 # Wait some time until GNOME Shell has been started.
 sleep 3
+
+# this doesn't return, so background and sleep a sec
+do_in_pod gnome-control-center &
+sleep 2
 
 # Now make a screenshot and show it!
 podman cp ${POD}:/opt/Xvfb_screen0 . && \
