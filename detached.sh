@@ -40,7 +40,7 @@ do_in_pod systemctl --user start "gnome-xsession@:99"
 sleep 3
 
 # run firefox
-do_in_pod ./firefox/firefox www.mozilla.org
+do_in_pod ./firefox/firefox www.mozilla.org &
 
 # sleep a bit
 sleep 2
