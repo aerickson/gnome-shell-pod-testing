@@ -28,6 +28,8 @@ do_in_pod tar -xf firefox.tar.bz2
 #do_in_pod gsettings set org.gnome.desktop.background picture-uri \
 #          "file:///usr/share/backgrounds/gnome/adwaita-day.jpg"
 
+# disable screen lock message
+do_in_pod gsettings set org.gnome.desktop.lockdown disable-lock-screen true
 
 # Wait until the user bus is available.
 do_in_pod wait-user-bus.sh 
@@ -49,7 +51,7 @@ sleep 2
 
 # Now make a screenshot and show it!
 podman cp ${POD}:/opt/Xvfb_screen0 . && \
-       convert xwd:Xvfb_screen0 capture.jp && \
+       convert xwd:Xvfb_screen0 capture.jpg && \
        eog capture.jpg
 
 # Now we can stop the container again.
