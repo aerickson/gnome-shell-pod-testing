@@ -41,9 +41,12 @@ do_in_pod gsettings set org.gnome.desktop.lockdown disable-lock-screen true
 # Wait until the user bus is available.
 do_in_pod wait-user-bus.sh 
 
-# Start GNOME Shell.
+# X11 or Wayland
+#
+# Start GNOME Shell (X11/xvfb).
 #do_in_pod systemctl --user start "gnome-xsession@:99"
-# TODO: use wayland
+#
+# Start nested GNOME Shell (wayland).
 do_in_pod systemctl --user start "gnome-wayland-nested:*"
 #gnome-wayland-nested@.service 
 
@@ -51,7 +54,14 @@ do_in_pod systemctl --user start "gnome-wayland-nested:*"
 sleep 3
 
 # run firefox
-do_in_pod ./firefox/firefox www.mozilla.org &
+# 
+do_in_pod ./firefox/firefox about:support &
+sleep 3
+#
+# nyt
+#
+# do_in_pod ./firefox/firefox www.nyt.com &
+# sleep 8
 
 # sleep a bit
 sleep 2
