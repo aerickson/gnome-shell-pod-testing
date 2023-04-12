@@ -58,8 +58,10 @@ sleep 2
 
 # Now make a screenshot and show it!
 podman cp ${POD}:/opt/Xvfb_screen0 . && \
-       convert xwd:Xvfb_screen0 capture.jpg && \
-       eog capture.jpg
+       convert xwd:Xvfb_screen0 capture.jpg 
+# to view live add to above
+# 	&& \
+        # eog capture.jpg
 
 # Now we can stop the container again.
 podman stop ${POD}
