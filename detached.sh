@@ -6,6 +6,13 @@ set -x
 # debugging/dev cleanup
 podman kill -a || true
 
+
+#
+#
+# based on script at https://github.com/aerickson/gnome-shell-pod#detached-mode
+#
+#
+
 # Run the container in detached mode.
 POD=$(podman run --rm --cap-add=SYS_NICE --cap-add=IPC_LOCK -td ghcr.io/schneegans/gnome-shell-pod-33)
 
