@@ -33,8 +33,10 @@ do_in_pod tar -xf firefox.tar.bz2
 do_in_pod wait-user-bus.sh 
 
 # Start GNOME Shell.
-do_in_pod systemctl --user start "gnome-xsession@:99"
+#do_in_pod systemctl --user start "gnome-xsession@:99"
 # TODO: use wayland
+do_in_pod systemctl --user start "gnome-wayland-nested:*"
+#gnome-wayland-nested@.service 
 
 # Wait some time until GNOME Shell has been started.
 sleep 3
@@ -47,7 +49,7 @@ sleep 2
 
 # Now make a screenshot and show it!
 podman cp ${POD}:/opt/Xvfb_screen0 . && \
-       convert xwd:Xvfb_screen0 capture.jpg && \
+       convert xwd:Xvfb_screen0 capture.jp && \
        eog capture.jpg
 
 # Now we can stop the container again.
